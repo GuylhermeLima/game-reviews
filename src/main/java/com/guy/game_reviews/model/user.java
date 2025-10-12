@@ -1,4 +1,4 @@
 package com.guy.game_reviews.model;
 
-public class user {
+public class User {
 }
