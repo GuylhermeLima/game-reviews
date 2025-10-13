@@ -3,6 +3,7 @@ package com.guy.game_reviews.model;
 import java.util.Date;
 import java.util.List;
 
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,7 +15,9 @@ public class Game {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String title;
+    @ElementCollection
     private List<String> genre;
+    @ElementCollection
     private List<String> plataform;
     private String urlImage;
     private Date releaseDate;
@@ -35,9 +38,6 @@ public class Game {
 
     // Getters
 
-    public long getId() {
-        return id;
-    }
     public String getTitle() {
         return title;
     }
