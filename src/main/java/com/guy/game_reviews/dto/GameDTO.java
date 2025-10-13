@@ -1,34 +1,20 @@
-package com.guy.game_reviews.model;
+package com.guy.game_reviews.dto;
 
 import java.time.LocalDate;
 import java.util.List;
 
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
-@Entity
-public class Game {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class GameDTO {
+    
     private long id;
     private String title;
-    @ElementCollection
     private List<String> genre;
-    @ElementCollection
     private List<String> plataform;
     private String urlImage;
     private LocalDate releaseDate;
     private float note;
     private long numReviews;
 
-    public Game(){
-
-    }
-
-    public Game(String title, List<String> genre, List<String> plataform, String urlImage, LocalDate releaseDate, float note){
+    public GameDTO(String title, List<String> genre, List<String> plataform, String urlImage, LocalDate releaseDate, float note){
         setTitle(title);
         setGenre(genre);
         setPlataform(plataform);
@@ -36,11 +22,12 @@ public class Game {
         setReleaseDate(releaseDate);
         setNote(note);
     }
-    
-
 
     // Getters
 
+    public long getID(){
+        return id;
+    }
     public String getTitle() {
         return title;
     }

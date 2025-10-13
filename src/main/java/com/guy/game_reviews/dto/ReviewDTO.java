@@ -1,35 +1,18 @@
-package com.guy.game_reviews.model;
+package com.guy.game_reviews.dto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import com.guy.game_reviews.model.Game;
+import com.guy.game_reviews.model.Usuario;
 
-@Entity
-public class Review {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ReviewDTO {
+    
     private long id;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
     private Usuario user;
-
-    @ManyToOne
-    @JoinColumn(name = "game_id")
     private Game game;
     private String title;
     private String comment;
     private float note;
 
-    public Review(){
-
-    }
-
-    public Review(Usuario user, Game game, String title, String comment, float note){
+    public ReviewDTO(Usuario user, Game game, String title, String comment, float note){
         setUser(user);
         setGame(game);
         setTitle(title);
@@ -56,8 +39,8 @@ public class Review {
     }
     public float getNote(){
         return note;
-    }
-
+    }  
+    
     //Setters
 
     public void setUser(Usuario user){
@@ -75,4 +58,5 @@ public class Review {
     public void setNote(float note){
         this.note = note;
     }
+
 }
