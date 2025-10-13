@@ -30,6 +30,15 @@ public class User {
     }
 
     //Setters
-    public void setUser
+    public void setUser(String user){
+        this.user = user;
+    }
+    public void setEmail(String email){
+        this.email = email;
+    }
+    public void setPassword(String password){
+        this.password = password;
+    }
+    
 
 }
