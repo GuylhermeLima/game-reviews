@@ -23,7 +23,7 @@ public class Review {
     private Game game;
     private String title;
     private String comment;
-    private float note;
+    private double note;
 
     public Review(){
 
@@ -54,7 +54,7 @@ public class Review {
     public String getComment(){
         return comment;
     }
-    public float getNote(){
+    public double getNote(){
         return note;
     }
 
@@ -72,7 +72,7 @@ public class Review {
     public void setComment(String comment){
         this.comment = comment;
     }
-    public void setNote(float note){
+    public void setNote(double note){
         this.note = note;
     }
 }
