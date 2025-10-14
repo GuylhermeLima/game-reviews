@@ -41,6 +41,9 @@ public class Game {
 
     // Getters
 
+    public long getId(){
+        return id;
+    }
     public String getTitle() {
         return title;
     }

@@ -1,10 +1,19 @@
 package com.guy.game_reviews.dto;
 
+import com.guy.game_reviews.model.Usuario;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 public class UsuarioCreateDTO {
+
+    public UsuarioCreateDTO(Usuario usuario){
+        setEmail(usuario.getEmail());
+        setNome(usuario.getNome());
+        setUsuario(usuario.getUsuario());
+        setSenha(usuario.getSenha());
+    }
 
     @NotBlank
     private String usuario;

@@ -1,33 +1,68 @@
 package com.guy.game_reviews.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.guy.game_reviews.dto.UsuarioCreateDTO;
+import com.guy.game_reviews.dto.UsuarioDTO;
 import com.guy.game_reviews.model.Usuario;
-import com.guy.game_reviews.repository.UsuarioRepository;
+import com.guy.game_reviews.service.UsuarioService;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioController {
     
-    @Autowired
-    private UsuarioRepository userRepository;
+    private final UsuarioService usuarioService;
+
+    public UsuarioController(UsuarioService usuarioService){
+        this.usuarioService = usuarioService;
+    }
 
     @PostMapping
-    public Usuario createUsuario(@RequestBody Usuario user) {  
-        return userRepository.save(user);
+    public ResponseEntity<UsuarioCreateDTO> create(@RequestBody UsuarioCreateDTO dto){
+        Usuario usuario = new Usuario();
+        usuario.setNome(dto.getNome());
+        usuario.setEmail(dto.getEmail());
+        usuario.setUsuario(dto.getUsuario());
+        usuario.setSenha(dto.getSenha());
+
+        Usuario created = usuarioService.create(usuario);
+        return ResponseEntity.status(201).body(new UsuarioCreateDTO(created));
     }
 
     @GetMapping
-    public List<Usuario> listUsuario() {
-        return userRepository.findAll();
+    public ResponseEntity<List<UsuarioDTO>> listAll(){
+        List<UsuarioDTO> list = usuarioService.listAll().stream().map(UsuarioDTO::new).collect(Collectors.toList());
+        return ResponseEntity.ok(list);
     }
-    
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UsuarioDTO> getById(@PathVariable Long id){
+        Usuario usuario = usuarioService.getById(id);
+        return ResponseEntity.ok(new UsuarioDTO(usuario));
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<UsuarioDTO> getByUsuario(@PathVariable String usuario){
+        Usuario user = usuarioService.findByUsuario(usuario);
+        return ResponseEntity.ok(new UsuarioDTO(user));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        usuarioService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

@@ -3,6 +3,8 @@ package com.guy.game_reviews.dto;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.guy.game_reviews.model.Game;
+
 public class GameDTO {
     
     private long id;
@@ -13,6 +15,17 @@ public class GameDTO {
     private LocalDate releaseDate;
     private float note;
     private long numReviews;
+
+    public GameDTO(Game game){
+        setId(game.getId());
+        setTitle(game.getTitle());
+        setGenre(game.getGenre());
+        setPlataform(game.getPlataform());
+        setUrlImage(game.getUrlImage());
+        setReleaseDate(game.getReleaseDate());
+        setNote(game.getNote());
+        setNumReviews(game.getNumReviews());
+    }
 
     public GameDTO(String title, List<String> genre, List<String> plataform, String urlImage, LocalDate releaseDate, float note){
         setTitle(title);
@@ -51,7 +64,9 @@ public class GameDTO {
     }
 
     //Setters
-
+    public void setId(Long id){
+        this.id = id;
+    }
     public void setTitle(String title) {
         this.title = title;
     }

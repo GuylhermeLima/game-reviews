@@ -1,6 +1,7 @@
 package com.guy.game_reviews.dto;
 
 import com.guy.game_reviews.model.Game;
+import com.guy.game_reviews.model.Review;
 import com.guy.game_reviews.model.Usuario;
 
 public class ReviewDTO {
@@ -10,7 +11,16 @@ public class ReviewDTO {
     private Game game;
     private String title;
     private String comment;
-    private float note;
+    private double note;
+
+    public ReviewDTO(Review review){
+        setId(review.getId());
+        setUser(review.getUser());
+        setGame(review.getGame());
+        setTitle(review.getTitle());
+        setComment(review.getComment());
+        setNote(review.getNote());
+    }
 
     public ReviewDTO(Usuario user, Game game, String title, String comment, float note){
         setUser(user);
@@ -37,12 +47,15 @@ public class ReviewDTO {
     public String getComment(){
         return comment;
     }
-    public float getNote(){
+    public double getNote(){
         return note;
     }  
     
     //Setters
 
+    public void setId(Long id){
+        this.id = id;
+    }
     public void setUser(Usuario user){
         this.user = user;
     }
@@ -55,7 +68,7 @@ public class ReviewDTO {
     public void setComment(String comment){
         this.comment = comment;
     }
-    public void setNote(float note){
+    public void setNote(double note){
         this.note = note;
     }
 
