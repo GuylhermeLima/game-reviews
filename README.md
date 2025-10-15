@@ -9,9 +9,9 @@ API RESTful para avaliação de jogos, permitindo cadastro de jogos, usuários e
 * Java 17
 * Spring Boot
 * Spring Data JPA
-* H2/PostgreSQL (ou outro banco de dados)
+* PostgreSQL
 * Maven
-* Postman/Thunder Client para testes
+* Postman ou Thunder Client para testes
 
 ---
 
@@ -134,6 +134,32 @@ API RESTful para avaliação de jogos, permitindo cadastro de jogos, usuários e
 ---
 
 ## Como rodar
+
+### 1️⃣ Instalar os recursos necessários
+
+* Java 17
+* Maven
+* PostgreSQL
+* Postman ou Thunder Client
+
+### 2️⃣ Criar o banco de dados
+
+1. Acesse o PostgreSQL:
+
+```sql
+CREATE DATABASE game_reviews;
+```
+
+2. Configure o `application.properties` ou `application.yml` do Spring Boot com:
+
+```properties
+spring.datasource.url=jdbc:postgresql://localhost:5432/game_reviews
+spring.datasource.username=SEU_USUARIO
+spring.datasource.password=SUA_SENHA
+spring.jpa.hibernate.ddl-auto=update
+```
+
+### 3️⃣ Rodar a API
 
 1. Clone o repositório:
 
