@@ -8,6 +8,10 @@ public class UsuarioDTO {
     private String nome;
     private String usuario;
 
+    public UsuarioDTO(){
+        
+    }
+
     public UsuarioDTO(Usuario usuario){
         setId(usuario.getId());
         setNome(usuario.getNome());

@@ -2,10 +2,13 @@ package com.guy.game_reviews.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.guy.game_reviews.exeption.ResourceNotFoundException;
 import com.guy.game_reviews.model.Usuario;
 import com.guy.game_reviews.repository.UsuarioRepository;
 
+@Service
 public class UsuarioService {
  
     private final UsuarioRepository usuarioRepository;
@@ -26,8 +29,8 @@ public class UsuarioService {
         return usuarioRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Usuario de ID: " + id + " não encontrado."));
     }
 
-    public Usuario findByUsuario(String usuario){
-        return usuarioRepository.findByUsuario(usuario).orElseThrow(() -> new ResourceNotFoundException("Usuário " + usuario + " não encontrado"));
+    public List<Usuario> findByUsuario(String usuario){
+        return usuarioRepository.findByUsuarioContainingIgnoreCase(usuario);
     }
 
     public void delete(Long id){

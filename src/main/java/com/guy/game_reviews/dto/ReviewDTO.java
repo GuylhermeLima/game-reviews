@@ -13,6 +13,10 @@ public class ReviewDTO {
     private String comment;
     private double note;
 
+    public ReviewDTO(){
+        
+    }
+
     public ReviewDTO(Review review){
         setId(review.getId());
         setUser(review.getUser());

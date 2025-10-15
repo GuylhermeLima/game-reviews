@@ -13,8 +13,12 @@ public class GameDTO {
     private List<String> plataform;
     private String urlImage;
     private LocalDate releaseDate;
-    private float note;
+    private double note;
     private long numReviews;
+
+    public GameDTO(){
+
+    }
 
     public GameDTO(Game game){
         setId(game.getId());
@@ -27,7 +31,7 @@ public class GameDTO {
         setNumReviews(game.getNumReviews());
     }
 
-    public GameDTO(String title, List<String> genre, List<String> plataform, String urlImage, LocalDate releaseDate, float note){
+    public GameDTO(String title, List<String> genre, List<String> plataform, String urlImage, LocalDate releaseDate, double note){
         setTitle(title);
         setGenre(genre);
         setPlataform(plataform);
@@ -56,7 +60,7 @@ public class GameDTO {
     public LocalDate getReleaseDate(){
         return releaseDate;
     }
-    public float getNote(){
+    public double getNote(){
         return note;
     }
     public long getNumReviews(){
@@ -82,7 +86,7 @@ public class GameDTO {
     public void setReleaseDate(LocalDate releaseDate){
         this.releaseDate = releaseDate;
     }
-    public void setNote(float note){
+    public void setNote(double note){
         this.note = note;
     }
     public void setNumReviews(long numReviews){

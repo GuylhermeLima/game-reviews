@@ -30,6 +30,7 @@ public class ReviewController {
     @PostMapping("/game/{gameId}")
     public ResponseEntity<ReviewDTO> create(@PathVariable Long gameId, @RequestBody ReviewDTO dto){
         Review review = new Review();
+        
         review.setGame(dto.getGame());
         review.setUser(dto.getUser());
         review.setTitle(dto.getTitle());

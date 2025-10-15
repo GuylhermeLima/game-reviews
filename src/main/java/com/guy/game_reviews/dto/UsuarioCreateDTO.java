@@ -8,13 +8,6 @@ import jakarta.validation.constraints.Size;
 
 public class UsuarioCreateDTO {
 
-    public UsuarioCreateDTO(Usuario usuario){
-        setEmail(usuario.getEmail());
-        setNome(usuario.getNome());
-        setUsuario(usuario.getUsuario());
-        setSenha(usuario.getSenha());
-    }
-
     @NotBlank
     private String usuario;
     @NotBlank
@@ -23,6 +16,17 @@ public class UsuarioCreateDTO {
     private String email;
     @Size(min = 6)
     private String senha;
+
+    public UsuarioCreateDTO(){
+        
+    }
+
+    public UsuarioCreateDTO(Usuario usuario){
+        setEmail(usuario.getEmail());
+        setNome(usuario.getNome());
+        setUsuario(usuario.getUsuario());
+        setSenha(usuario.getSenha());
+    }
 
     // Getters
     public String getUsuario(){

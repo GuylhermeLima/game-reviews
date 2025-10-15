@@ -13,6 +13,8 @@ import com.guy.game_reviews.dto.GameDTO;
 import com.guy.game_reviews.model.Game;
 import com.guy.game_reviews.service.GameService;
 
+import jakarta.persistence.EntityNotFoundException;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -78,10 +80,14 @@ public class GameController {
 
     }
 
-    @DeleteMapping("/id")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
-        gameService.delete(id);
-        return ResponseEntity.noContent().build();
+        try{
+            gameService.delete(id);
+            return ResponseEntity.noContent().build();
+        }catch(EntityNotFoundException e){
+            return ResponseEntity.notFound().build();
+        }
     }
     
     

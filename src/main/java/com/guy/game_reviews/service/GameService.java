@@ -4,9 +4,12 @@ import com.guy.game_reviews.repository.GameRepository;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.guy.game_reviews.exeption.ResourceNotFoundException;
 import com.guy.game_reviews.model.Game;
 
+@Service
 public class GameService {
     
     private final GameRepository gameRepository;
@@ -43,6 +46,7 @@ public class GameService {
 
     public void delete(Long id){
         if (!gameRepository.existsById(id)) throw new ResourceNotFoundException("Game de ID: " + id + " Não encontrado.");
+        gameRepository.deleteById(id);
     }
 
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.guy.game_reviews.dto.UsuarioCreateDTO;
 import com.guy.game_reviews.dto.UsuarioDTO;
@@ -54,9 +55,9 @@ public class UsuarioController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<UsuarioDTO> getByUsuario(@PathVariable String usuario){
-        Usuario user = usuarioService.findByUsuario(usuario);
-        return ResponseEntity.ok(new UsuarioDTO(user));
+    public ResponseEntity<List<UsuarioDTO>> searchByUsuario(@RequestParam String usuario){
+        List<UsuarioDTO> result = usuarioService.findByUsuario(usuario).stream().map(UsuarioDTO::new).collect(Collectors.toList());
+        return ResponseEntity.ok(result);
     }
 
     @DeleteMapping("/{id}")

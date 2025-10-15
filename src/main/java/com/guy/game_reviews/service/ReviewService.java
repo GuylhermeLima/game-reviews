@@ -5,9 +5,12 @@ import com.guy.game_reviews.repository.ReviewRepository;
 import java.util.List;
 import java.util.OptionalDouble;
 
+import org.springframework.stereotype.Service;
+
 import com.guy.game_reviews.exeption.ResourceNotFoundException;
 import com.guy.game_reviews.model.Review;
 
+@Service
 public class ReviewService {
     
     private final ReviewRepository reviewRepository;
