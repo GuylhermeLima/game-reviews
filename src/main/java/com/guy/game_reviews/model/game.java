@@ -21,7 +21,7 @@ public class Game {
     private List<String> plataform;
     private String urlImage;
     private LocalDate releaseDate;
-    private float note;
+    private double note;
     private long numReviews;
 
     public Game(){
@@ -59,7 +59,7 @@ public class Game {
     public LocalDate getReleaseDate(){
         return releaseDate;
     }
-    public float getNote(){
+    public double getNote(){
         return note;
     }
     public long getNumReviews(){
@@ -83,7 +83,7 @@ public class Game {
     public void setReleaseDate(LocalDate releaseDate){
         this.releaseDate = releaseDate;
     }
-    public void setNote(float note){
+    public void setNote(double note){
         this.note = note;
     }
     public void setNumReviews(long numReviews){

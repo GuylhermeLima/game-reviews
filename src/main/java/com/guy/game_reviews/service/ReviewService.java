@@ -19,15 +19,18 @@ import com.guy.game_reviews.model.Usuario;
 
 @Service
 public class ReviewService {
+
+    private final GameService gameService;
     
     private final ReviewRepository reviewRepository;
     private final GameRepository gameRepository;
     private final UsuarioRepository usuarioRepository;
 
-    public ReviewService(ReviewRepository reviewRepository, GameRepository gameRepository, UsuarioRepository usuarioRepository){
+    public ReviewService(ReviewRepository reviewRepository, GameRepository gameRepository, UsuarioRepository usuarioRepository, GameService gameService){
         this.reviewRepository = reviewRepository;
         this.gameRepository = gameRepository;
         this.usuarioRepository = usuarioRepository;
+        this.gameService = gameService;
     }
 
     public Review create(Review review){
@@ -47,6 +50,7 @@ public class ReviewService {
         review.setComment(dto.getComment());
         review.setNote(dto.getNote());
 
+        updateGameAverageNote(gameService.getById(gameId));
         return reviewRepository.save(review);
     }
 
@@ -70,12 +74,23 @@ public class ReviewService {
         existing.setTitle(updated.getTitle());
         existing.setComment(updated.getComment());
         existing.setNote(updated.getNote());
+
+        updateGameAverageNote(gameService.getById(id));
         return reviewRepository.save(existing);
+        
     }
 
     public void delete(Long id){
         if (!reviewRepository.existsById(id)) throw new ResourceNotFoundException("Review Não encontrada");
         reviewRepository.deleteById(id);
+        updateGameAverageNote(gameService.getById(id));
+    }
+
+    private void updateGameAverageNote(Game game){
+        List<Review> reviews = reviewRepository.findByGameId(game.getId());
+        double avg = reviews.stream().mapToDouble(Review::getNote).average().orElse(0.0);
+        game.setNote(avg);
+
     }
 
 }
