@@ -1,32 +1,30 @@
 package com.guy.game_reviews.dto;
 
+import com.guy.game_reviews.model.Game;
 import com.guy.game_reviews.model.Review;
+import com.guy.game_reviews.model.Usuario;
 
-public class ReviewDTO {
+public class ReviewCreateDTO {
     
     private long id;
-    private UsuarioDTO user;
-    private GameDTO game;
+    private Long usuarioId;
     private String title;
     private String comment;
     private double note;
 
-    public ReviewDTO(){
+    public ReviewCreateDTO(){
         
     }
 
-    public ReviewDTO(Review review){
+    public ReviewCreateDTO(Review review){
         setId(review.getId());
-        setUser(new UsuarioDTO(review.getUser()));
-        setGame(new GameDTO(review.getGame()));
+        setUsuarioId(review.getUser().getId());
         setTitle(review.getTitle());
         setComment(review.getComment());
         setNote(review.getNote());
     }
 
-    public ReviewDTO(UsuarioDTO user, GameDTO game, String title, String comment, float note){
-        setUser(user);
-        setGame(game);
+    public ReviewCreateDTO(Usuario user, Game game, String title, String comment, float note){
         setTitle(title);
         setComment(comment);
         setNote(note);
@@ -37,11 +35,8 @@ public class ReviewDTO {
     public long getId(){
         return id;
     }
-    public UsuarioDTO getUser(){
-        return user;
-    }
-    public GameDTO getGame(){
-        return game;
+    public Long getUsuarioId(){
+        return usuarioId;
     }
     public String getTitle(){
         return title;
@@ -58,11 +53,8 @@ public class ReviewDTO {
     public void setId(Long id){
         this.id = id;
     }
-    public void setUser(UsuarioDTO user){
-        this.user = user;
-    }
-    public void setGame(GameDTO game){
-        this.game = game;
+    public void setUsuarioId(Long usuarioId){
+        this.usuarioId = usuarioId;
     }
     public void setTitle(String title){
         this.title = title;

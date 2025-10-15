@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.guy.game_reviews.dto.ReviewCreateDTO;
 import com.guy.game_reviews.dto.ReviewDTO;
 import com.guy.game_reviews.model.Review;
 import com.guy.game_reviews.service.ReviewService;
@@ -28,17 +29,9 @@ public class ReviewController {
     }
 
     @PostMapping("/game/{gameId}")
-    public ResponseEntity<ReviewDTO> create(@PathVariable Long gameId, @RequestBody ReviewDTO dto){
-        Review review = new Review();
-        
-        review.setGame(dto.getGame());
-        review.setUser(dto.getUser());
-        review.setTitle(dto.getTitle());
-        review.setComment(dto.getComment());
-        review.setNote(dto.getNote());
-
-        Review created = reviewService.create(review);
-        return ResponseEntity.status(201).body(new ReviewDTO(created));
+    public ResponseEntity<ReviewDTO> create(@PathVariable Long gameId, @RequestBody ReviewCreateDTO dto){
+        Review review = reviewService.create(gameId, dto);
+        return ResponseEntity.status(201).body(new ReviewDTO(review));
     }
 
     @GetMapping
